@@ -1,6 +1,8 @@
 # Task-Assignment Module
 A Web app that manages your day to day task and csv uploads, Express.js, Mongoose, MongoDB, mLab, Node-Mailer, Gmail-API, Passport.js, Express-Handlebars, Bootstrap, jQuery, fast-csv, HTML5 & CSS.
 
+# Screeshots shared in application folder you can check the outputs of the application
+
 # Node JS with Mongo DB
 A simple and Structured Task Assignment Application using Node JS and Mongo DB. 
 
