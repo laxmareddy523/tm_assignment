@@ -1,0 +1,42 @@
+{
+  "name": "tm_assignment",
+  "version": "1.0.0",
+  "description": "A Simple Task Assignment Module For TM.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "Laxmareddy",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "csvtojson": "^2.0.10",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "fast-csv": "^3.4.0",
+    "jsonwebtoken": "^8.1.1",
+    "moment": "^2.20.1",
+    "mongoose": "^4.13.6",
+    "nodemailer": "^4.4.2",
+    "nodemailer-express-handlebars": "^3.0.0",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "nodemon": "^1.12.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pm2": "^3.5.1",
+    "rand-token": "^0.4.0",
+    "serve-favicon": "^2.4.5",
+    "winston": "^3.2.1",
+    "xoauth2": "^1.2.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.0"
+  }
+}

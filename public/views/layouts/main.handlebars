@@ -1,0 +1,143 @@
+<!DOCTYPE>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Task Assignment Module</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/jm.spinner.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- include Jquery -->
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+    <!-- include bootstrap css -->
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+
+    <!-- include moment.js to work fine with dates -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+
+    <!-- include velocity.js for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.1/velocity.min.js"></script>
+  </head>
+
+  <body>
+    <div id="spinner"></div>
+
+    <!-- delete confirmation Modal starts -->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body forTask">
+            Are you sure you want to delete the Task?
+          </div>
+          <div class="modal-body forCategory">
+            Are you sure you want to delete the Category?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary btn-danger sure-del-task forTask" data-taskid="">Yes</button>
+            <button type="button" class="btn btn-primary btn-danger sure-del-category forCategory" data-categoryid="">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- delete confirmation Modal ends-->
+
+    <!-- add category Modal starts -->
+    <div class="modal" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCategoryModalLabel">Add Skill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+               <input type="text" id="skill_name_modal" class="form-control" placeholder="Skill Name" required onfocus="onfocusAction('skill_name_modal')"/>
+              <span id="skill_name_modal_err" class="errMsgSpan float-left" style="margin-top: 0px;">*Enter valid values</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary add-category-modal-btn">Submit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- add category Modal ends -->
+
+    <!-- Container Starts -->
+    <div class="container" style="margin-top: -20px;">
+      <div class="header clearfix" style="padding-left: 15px; padding-top: 15px;">
+        <h3 class="text-muted otherTM" style="display: none; color: white;">Task Assignment Module</h3>
+        <nav>
+          <ul class="nav nav-pills float-right" style="font-size: 20px;">
+            <li class="nav-item">
+              {{#if isActiveNavLink_Tasks}}
+                <a class="nav-link active" href="/users" onclick="if(window.location.pathname != $(this).attr('href')) {showSpinner(); return true;} else{return;}">Tasks <span class="sr-only">(current)</span></a>
+              {{else}}
+                <a class="nav-link" href="/users" onclick="if(window.location.pathname != $(this).attr('href')) {showSpinner(); return true;} else{return;}">Tasks</a>
+              {{/if}}
+            </li>
+            <li class="nav-item">
+              {{#if isActiveNavLink_AddTask}}
+                <a class="nav-link active" href="/users/addTask" onclick="if(window.location.pathname != $(this).attr('href')) {showSpinner(); return true;} else{return;}">Assign Task <span class="sr-only">(current)</span></a>
+              {{else}}
+                <a class="nav-link" href="/users/addTask" onclick="if(window.location.pathname != $(this).attr('href')) {showSpinner(); return true;} else{return;}">Assign Task</a>
+              {{/if}}
+            </li>
+            <li class="nav-item">
+              {{#if isActiveNavLink_ManageCategories}}
+                <a class="nav-link active" href="/users/categories" onclick="if(window.location.pathname != $(this).attr('href')) {showSpinner(); return true;} else{return;}">Manage Skills <span class="sr-only">(current)</span></a>
+              {{else}}
+                <a class="nav-link" href="/users/categories" onclick="if(window.location.pathname != $(this).attr('href')) {showSpinner(); return true;} else{return;}">Manage Skills</a>
+              {{/if}}
+            </li>
+
+            <!-- Logout nav link starts -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="font-weight: bold; font-style: italic;">
+                Welcome, {{user.firstName}}
+              </a>
+              <div class="dropdown-menu myProfileDropdown" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/users/changePasswordPage"
+                onclick="showSpinner(); return true;">Change Password</a>
+                <a class="dropdown-item" href="/logout"  onclick="showSpinner(); return true;">Logout</a>
+              </div>
+            </li>
+            <!-- Logout nav link ends -->
+          </ul>
+        </nav>
+        <h3 class="text-muted TM" style="color: white !important;">Task Assignment Module</h3>
+      </div>
+
+      {{{body}}}
+
+      <footer class="footer text-center">
+        <div class="container">
+        <p class="myFont" style="font-size: 15px; font-weight: bold; color: #6c0054;">&copy; Design and Develped by Laxmareddy @ 2019 For TM - Assignment </p>
+        </div>
+      </footer>
+
+    </div>
+    <!-- Container Ends -->
+
+  </body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../../js/main.js"></script>
+  <script type="text/javascript" src="../../js/jm.spinner.js"></script>
+</html>
